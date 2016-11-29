@@ -1,0 +1,10 @@
+(:Declaring a namespace:)
+declare namespace ns = "http://mary.dfki.de/installer";
+
+(: Select every voice element that has the attribute locale which is equal to en_GB or en_US:)
+for $voice in fn:doc("voices.xml")//ns:voice[@locale="en_GB" or @locale="en_US"]
+
+(: Return a pretty text :)
+return <voice locale="{$voice/@locale}" name="{$voice/@name}" gender="{$voice/@gender}">
+           {$voice//ns:location[@folder="false"]}
+       </voice>
